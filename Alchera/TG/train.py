@@ -31,12 +31,12 @@ CHANNUL_NUM_LIST = [3, 32, 64, 128, 256]
 LABEL_NUM = 15
 amp = False
 
-TRAIN_HUMAN_PATH = '/home/mts/taegyu/nunbody/train_dataset/Train/Image/*' 
-TRAIN_MASK_PATH = '/home/mts/taegyu/nunbody/train_dataset/Train/Mask/*' 
+TRAIN_HUMAN_PATH = '/Train/Image/*' 
+TRAIN_MASK_PATH = '/Train/Mask/*' 
 VAL_HUMAN_PATH = None 
 VAL_MASK_PATH = None 
-TEST_HUMAN_PATH = '/home/mts/taegyu/Inbody_Segmentation_testset_Participant_pixelchange_gray-smooth/image/*' 
-TEST_MASK_PATH = '/home/mts/taegyu/Inbody_Segmentation_testset_Participant_pixelchange_gray-smooth/mask/*' 
+TEST_HUMAN_PATH = '/image/*' 
+TEST_MASK_PATH = '/mask/*' 
 
 MODEL_LEARNING_HISTORY_PATH = 'log_dir'
 MODEL_SAVE_PATH = 'model_save'
@@ -44,7 +44,7 @@ MODEL_SAVE_PATH = 'model_save'
 os.makedirs(MODEL_SAVE_PATH, exist_ok=True)
 
 # logging
-experiment = wandb.init(project="my-test-project", entity="cau")
+experiment = wandb.init(project="", entity="")
 experiment.config.update(dict(epochs=EPOCHS, batch_size=BATCH_SIZE, learning_rate=LEARNING_RATE))
                          
 logging.info(f'''Starting training:
@@ -61,7 +61,7 @@ model = smp.UnetPlusPlus(
     classes=15,                      # model output channels (number of classes in your dataset)
 ).to(DEVICE)
 
-SAVED_MODEL = '/home/mts/taegyu/inbody_segmentation/model_save/latest.pt'
+SAVED_MODEL = '/model_save/latest.pt'
 
 # 모델을 불러와서 재학습할 시 model dict 불러오기
 # checkpoint = torch.load(SAVED_MODEL, map_location=DEVICE)
